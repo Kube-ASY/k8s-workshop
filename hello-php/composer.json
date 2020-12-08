@@ -1,0 +1,8 @@
+{
+    "name": "kube-asy/hello-php",
+    "type": "project",
+    "require": {
+        "slim/slim": "3.11.0",
+        "guzzlehttp/guzzle": "6.5.5"
+    }
+}
