@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gb-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: guestbook
+        tier: frontend
+  template:
+    metadata:
+      labels:
+        app: guestbook
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+          - name: nginx-conf
+            mountPath: /opt/bitnami/nginx/conf/server_blocks
+      volumes:
+        - name: nginx-conf
+          configMap: 
+            name: gb-nginx-config
+            items:
+            - key: gb-vhost.conf
+              path: gb-vhost.conf
