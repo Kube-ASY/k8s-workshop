@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx
+  name: nginx-single
+  namespace: k8s-workshop
+spec:
+  containers:
+  - image: nginx:1.19
+    name: nginx
+    volumeMounts: 
+      - name: auth-volume
+        mountPath: /mnt/nginx-auth
+  volumes:
+    - name: auth-volume
+      configMap:
+        name: nginx-auth
