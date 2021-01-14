@@ -21,7 +21,7 @@ spec:
     ports:
     - containerPort: 80
     env:
-      - name: WELCOME_MESSAGE
+      - name: HELLO_MESSAGE
         valueFrom:
           configMapKeyRef:
             name: helloweb-conf
