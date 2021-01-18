@@ -2,7 +2,7 @@
     "name": "kube-asy/hello-php",
     "type": "project",
     "require": {
-        "slim/slim": "3.12.3",
+        "slim/slim": "4.7.1",
         "guzzlehttp/guzzle": "7.2.0"
     }
 }
