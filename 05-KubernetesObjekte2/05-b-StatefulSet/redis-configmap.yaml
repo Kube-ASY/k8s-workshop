@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis
+data:
+  master.conf: |
+    bind 0.0.0.0
+    protected-mode yes
+    port 6379
+  follower.conf: |
+    replicaof redis-0.redis 6379
