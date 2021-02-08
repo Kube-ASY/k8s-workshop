@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: kubectl-default
+  name: kubectl-default
+  namespace: rbac
+spec:
+  containers:
+  - image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/kubectl:1.20.0
+    imagePullPolicy: IfNotPresent
+    name: kubectl
+    command: [ "sleep","3600" ]
+  restartPolicy: Always
+  serviceAccount: default
+  serviceAccountName: default
