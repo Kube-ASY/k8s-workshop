@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  vhost.conf: | 
+    server {
+      listen 0.0.0.0:8080;
+      server_name website.k8s-workshop.info;
+
+      root /website/htdocs;
+      index index.html;
+    }
