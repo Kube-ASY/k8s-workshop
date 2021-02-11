@@ -11,11 +11,10 @@ docker push  ${HARBOR}/gb-phpfpm:v5
 # Copy nginx container to Harbor
 
 #docker pull bitnami/nginx:1.19
-docker build -t ${HARBOR}/gb-nginx:1.19 -f docker/Dockerfile.nginx docker/
+docker build -t ${HARBOR}/gb-nginx:latest -t ${HARBOR}/gb-nginx:1.19 -f docker/Dockerfile.nginx docker/
 
-#docker pull nginx:1.19
-#docker tag bitnami/nginx:1.19  ${HARBOR}/gb-nginx:1.19
 docker push ${HARBOR}/gb-nginx:1.19
+docker push ${HARBOR}/gb-nginx:latest
 
 # Copy redis Container to Harbor
 
