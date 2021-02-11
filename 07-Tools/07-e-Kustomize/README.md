@@ -36,4 +36,8 @@ resources:
   * und Patches zur Modifikation:
     * latest Tag für das Image
     * reduzierte Resource requests
+
+## Links
+* [https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/]
+* [https://kustomize.io/]
   
