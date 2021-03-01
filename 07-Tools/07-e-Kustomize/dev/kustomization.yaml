@@ -1,0 +1,9 @@
+bases:
+- ../app
+namespace: dev
+namePrefix: dev-
+commonLabels:
+  environment: dev
+patchesStrategicMerge:
+  - resources-patch.yaml
+  - latest-patch.yaml

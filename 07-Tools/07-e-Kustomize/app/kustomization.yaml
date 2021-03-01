@@ -1,0 +1,7 @@
+configMapGenerator:
+- name: nginx-config
+  files:
+  - vhost.conf
+resources:
+- nginx-deployment.yaml
+- nginx-service.yaml

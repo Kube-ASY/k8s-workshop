@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress
+spec:
+  selector:
+    matchLabels:
+      app: stress
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: stress
+    spec:
+      containers:
+        - name: stress
+          image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/stress:latest
+          resources:
+            requests:
+              memory: "50Mi"
+            limits:
+              memory: "100Mi"
+          command: ["stress"]
+          args: ["--vm", "1", "--vm-bytes", "120M", "--vm-hang", "1"]

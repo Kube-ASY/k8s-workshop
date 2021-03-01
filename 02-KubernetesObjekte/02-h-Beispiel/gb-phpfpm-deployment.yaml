@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gb-phpfpm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: guestbook
+        tier: phpfpm
+  template:
+    metadata:
+      labels:
+        app: guestbook
+        tier: phpfpm
+    spec:
+      containers:
+      - name: phpfpm
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v5
+        env:
+        - name: GET_HOSTS_FROM
+          value: "env"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+        ports:
+        - containerPort: 9000
+          name: phpfpm

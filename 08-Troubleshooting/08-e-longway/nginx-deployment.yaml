@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: website
+  template:
+    metadata:
+      labels:
+        app: website
+    spec:
+      initContainers:
+      - name: git
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/git:latest
+        imagePullPolicy: IfNotPresent
+        command:
+          - "sh"
+          - "-c"
+          - "cd /website; \
+             if [ ! -d k8s-workshop ]; then \ 
+             git clone https://github.com/Kube-ASY/k8s-workshop.git ; \ 
+             ln -sf k8s-workshop/website htdocs ; \
+             else \
+             cd k8s-workshop ; \
+             git pull ; \
+             fi"
+        volumeMounts:
+          - name: website
+            mountPath: /website            
+      containers:
+      - name: nginx
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+          - name: nginx-conf
+            mountPath: /opt/bitnami/nginx/conf/server_blocks
+          - name: website
+            mountPath: /website
+      volumes:
+        - name: nginx-conf
+          configMap: 
+            name: nginx-config
+            items:
+            - key: vhost.conf
+              path: website-vhost.conf
+        - name: website
+          persistentVolumeClaim:
+            claimName: nginx-website

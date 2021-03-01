@@ -1,0 +1,4 @@
+FROM bitnami/nginx:1.19
+
+ADD controllers.js /app/controllers.js
+ADD index.html /app/index.html

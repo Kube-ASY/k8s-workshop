@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dice
+spec:
+  completions: 4
+  parallelism: 1
+  template:
+    spec:
+      containers:
+      - name: dice
+        image: busybox
+        command:
+          - /bin/sh
+          - -c
+          - | 
+            if [ $(($RANDOM % 2 + 1)) -eq 2 ]; then
+              echo "Pair - you are complete" 
+              exit 0
+            else
+              echo "Impair - try again"
+              exit 1
+            fi
+      restartPolicy: Never
+  backoffLimit: 24
