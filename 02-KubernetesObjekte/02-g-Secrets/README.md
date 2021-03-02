@@ -30,6 +30,6 @@ spec:
         mountPath: /mnt/nginx-auth
   volumes:
     - name: auth-volume
-      configMap:
-        name: nginx-auth
+      secret:
+        secretName: nginx-auth
 ```
