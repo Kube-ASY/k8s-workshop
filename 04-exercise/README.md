@@ -20,7 +20,7 @@ Deploye die hello-app in diesem Verzeichnis in dem Du
 
 ## (c) Environment und Secrets
 * Erstelle eine Secret mit Namen `helloweb` im Namespace `hello-04` die unter dem key `message` den Text "Kubernetes Workshop Hello App!" enthält.
-* Füge dem Container im Deployment helloweb eine Umgebungsvariable `HELLO_MESSAGE` hinzu, die aus dem o.a. ConfigMap-Key gefüllt wird.
+* Füge dem Container im Deployment helloweb eine Umgebungsvariable `HELLO_MESSAGE` hinzu, die aus dem o.a. Secret-Key gefüllt wird.
 * Ändere den Text im Secret. Überprüfe wie die App darauf regiert.
 * Was ist zu tun damit der neue Text angezeigt wird.
 
