@@ -4,7 +4,7 @@
 
 Wir nehmen den nginx aus dem Guestbook Example und verwenden ihn um eine statische Website zu hosten.
 
-Im Ordner 06_a_volumes befinden sich
+Im Ordner befinden sich
 * nginx-deployment.yaml
 * nginx-configmap.yaml
 * nginx-service.yaml
