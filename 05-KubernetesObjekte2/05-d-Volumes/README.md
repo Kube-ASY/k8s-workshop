@@ -88,3 +88,48 @@ spec:
 * `kubectl get storageclass`
 * `kubectl get storageclass -o yaml`
 * `kubectl -n kube-system get pods`
+
+
+## StatefulSets mit PVC
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-pvc
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  serviceName: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 1Gi
+```
+
+* `kubectl apply -f nginx-pvc-sts.yaml`
+* `kubectl get pods`
+* `kubectl get pvc`
+* `kubectl delete sts nginx-pvc`
+* `kubectl get pvc`
