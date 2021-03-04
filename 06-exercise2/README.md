@@ -14,9 +14,11 @@ Im Ordner befinden sich
 
 * Erstelle wie in 5-f Beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
 
-Hier sieht man nur einen http-404 Fehler. Warum?
+*Wenn hier ein HTTP-404 kommt ist alles OK*
 
-Tip: Schau in die Logs des Containers
+Tip: Schau in die Logs des Containers. 
+Scheint wohl einfach noch kein Content vorhanden zu sein. 
+Darum kümmern wir uns jetzt.
 
 
 ### (b) Ein Volume die Website zu hosten
