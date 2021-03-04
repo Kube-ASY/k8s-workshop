@@ -57,7 +57,7 @@ Was ist die Ursache, wo liegt der Fehler?
 
 ### Setup
 * CleanUP: `./cleanup.sh ; ./create_namespace.sh`
-* `kubectl apply -f ./08-d-longway`
+* `kubectl apply -f ./08-e-longway`
 
 Die Website die hier deployed wird scheint nicht erreichbar zu sein:
 
