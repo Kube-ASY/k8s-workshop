@@ -4,9 +4,14 @@ export HARBOR=harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop
 
 # Build Guestbook
 
-docker build -t ${HARBOR}/gb-phpfpm:v5 docker/
+docker build -t ${HARBOR}/gb-phpfpm:v6 docker/
 
-docker push  ${HARBOR}/gb-phpfpm:v5
+docker push  ${HARBOR}/gb-phpfpm:v6
+
+docker build -t ${HARBOR}/gb-phpfpm:v7 docker-sts/
+
+docker push  ${HARBOR}/gb-phpfpm:v7
+
 
 # Copy nginx container to Harbor
 
