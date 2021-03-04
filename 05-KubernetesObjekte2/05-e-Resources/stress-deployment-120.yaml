@@ -21,4 +21,4 @@ spec:
             limits:
               memory: "100Mi"
           command: ["stress"]
-          args: ["--vm", "1", "--vm-bytes", "120M", "--vm-hang", "1"]
+          args: ["--vm", "1", "--vm-bytes", "300M", "--vm-hang", "1"]
