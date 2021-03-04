@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: workload
-          image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/workload:1.0
+          image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/workload:2.0
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "50Mi"
