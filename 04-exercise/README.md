@@ -39,7 +39,7 @@ Hinweis: die Syntax für eine Secret-Referenz findest Du hier: [https://kubernet
 
 ## Lösungen:
 Die Lösungen sind Baset64 kodiert um sie zu lesen
-  * Kodierten Text kopieren und z.B. hier Online Decodieren: [https://www.base64decode.org/]
+  * Kodierten Text kopieren und z.B. hier Online Decodieren: [https://base64.guru/converter/decode]
   * Kodierten Text in das Tool base64 pipen
     `echo "<CODIERT>" | base64 -d
   * Im VisualStudioCode Editor die Extension `vscode-base64` installieren. Dann kann man Base64 Text markieren und mit Ctrl-e Ctrl-d dekodieren (Ctrl-e Ctrl-e kodiert)
