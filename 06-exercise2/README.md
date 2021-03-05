@@ -13,7 +13,7 @@ Im Ordner befinden sich
 * Erstelle einen Namespace `website` und deploye diese Komponenten darin.
 * Setze den Current-Context deiner kubectl config auf diesen Namespace
 
-* Erstelle wie in [5-g-Ingress|../05-KubernetesObjekte2/05-g-Ingress] beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
+* Erstelle wie in [05-g-Ingress](../05-KubernetesObjekte2/5-g-Ingress/) beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
     * `helloweb-ingress.yaml`
     ```yaml
     apiVersion: networking.k8s.io/v1
@@ -34,6 +34,10 @@ Im Ordner befinden sich
                       number: 80
     ```
 
+  * Hosts Eintrag:
+  ```bash
+  echo "$(minikube ip) website.k8s-workshop.info" | sudo tee -a /etc/hosts
+  ```
 
 *Wenn hier ein HTTP-404 kommt ist alles OK*
 
@@ -43,17 +47,19 @@ Darum kümmern wir uns jetzt.
 
 
 ### (b) Ein Volume die Website zu hosten
-* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen nginx-website und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml] 
-* Modifizieren das nginx-deployment und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes)
+* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen nginx-website und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [dynamic-www-pvc.yaml](../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml)
+* Modifizieren das nginx-deployment und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes) [nginx-pvc-pod.yaml](../05-KubernetesObjekte2/05-d-Volumes/nginx-pvc-pod.yaml)
 * Deploye das modifizierte nginx-deployment
-* Was ist jetzt zu sehen. Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
+* Was ist jetzt zu sehen?
+  Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
 
 ### (c) Manuelles Deployment der Website
 
 * Kopiere den Inhalt des Ordners website in den laufenden Container unter /website/htdocs
 * Tip: probiere `kubectl cp`Befehl einmal aus, aber es ist nicht schandhaft jetzt mal kurz in die Lösung zu schauen, der Befehl ist tricky.
 * Du kannst das Ergebnis prüfen wenn Du per `kubectl exec` die Verzeichnisse listest.
-* Schaue Dir jetzt mal Deine Website im Browser an. Der 404 sollte jetzt einer richtigen Website gewichen sein.
+* Schaue Dir jetzt mal Deine Website im Browser an. 
+  Der 404 sollte jetzt einer richtigen Website gewichen sein.
 
 ### (d) Automatisches Deployment per InitContainer
 
@@ -73,6 +79,8 @@ Darum kümmern wir uns jetzt.
                git pull ; \
              fi"
   ```
+* Rufe die Logs des initContainers ab
+
 
 ### (e) [Optional] SideCar
 

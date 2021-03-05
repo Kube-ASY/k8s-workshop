@@ -5,7 +5,7 @@
 Zwischen den Übungen empfiehlt es sich mit den Scripten
 
 * `./cleanup.sh`
-* `./create_namespace.sh`
+* `./create-namespace.sh`
 
 Einen sauberen Stand zu erzeugen.
 
@@ -14,7 +14,7 @@ Einen sauberen Stand zu erzeugen.
 ### Setup
 
 * Erstelle den Namespace k8s-workshop mit dem Script
-  `./create_namespace.sh`
+  `./create-namespace.sh`
 * Deploye die yaml Manifeste im Verzeichnis 08-a-warmup:
   `kubectl apply -f ./08-a-warmup`
 
@@ -28,7 +28,7 @@ Korrigiere die Manifeste und behebe den Fehler.
 
 ### Setup
 
-* CleanUP: `./cleanup.sh ; ./create_namespace.sh`
+* CleanUP: `./cleanup.sh ; ./create-namespace.sh`
 * `kubectl apply -f ./08-b-wilde13`
 
 Es ist Freitag der 13. Dein Kollege hat ein Deployment Eurer Applikation durchgeführt.
@@ -38,7 +38,7 @@ Das Ergebnis siehst Du im Cluster. Von der alten Version läuft noch ein Pod, ab
 
 ## (c) ReadyOrNot
 ### Setup
-* CleanUP: `./cleanup.sh ; ./create_namespace.sh`
+* CleanUP: `./cleanup.sh ; ./create-namespace.sh`
 * `kubectl apply -f ./08-c-readyornot`
 
 Schaue Dir die Pods an. Es sieht so aus als würde der Container immer wieder restartet.
@@ -47,7 +47,7 @@ Was ist die Ursache, wo liegt der Fehler
 
 ## (d) OhOh
 ### Setup
-* CleanUP: `./cleanup.sh ; ./create_namespace.sh`
+* CleanUP: `./cleanup.sh ; ./create-namespace.sh`
 * `kubectl apply -f ./08-d-OhOh`
 
 Schaue Dir die Pods an. Es sieht so aus als würde der Container immer wieder restartet.
@@ -56,8 +56,8 @@ Was ist die Ursache, wo liegt der Fehler?
 ## (e) LongWay
 
 ### Setup
-* CleanUP: `./cleanup.sh ; ./create_namespace.sh`
-* `kubectl apply -f ./08-d-longway`
+* CleanUP: `./cleanup.sh ; ./create-namespace.sh`
+* `kubectl apply -f ./08-f-longway`
 
 Die Website die hier deployed wird scheint nicht erreichbar zu sein:
 
