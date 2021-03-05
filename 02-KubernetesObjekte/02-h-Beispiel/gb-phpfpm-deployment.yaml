@@ -15,11 +15,8 @@ spec:
     spec:
       containers:
       - name: phpfpm
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v5
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v6
         imagePullPolicy: Always
-        env:
-        - name: GET_HOSTS_FROM
-          value: "env"
         resources:
           requests:
             cpu: 10m

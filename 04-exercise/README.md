@@ -1,36 +1,48 @@
 # Übungen 1
 
-## (a) Deployment der hello-app
+## (a) _Deployment_ der hello-app
 
 Deploye die hello-app in diesem Verzeichnis in dem Du 
-* Einen Namespace erstellen mit Namen `hello-04`
-* Deploye das Deployment aus den beiden .yaml Dateien aus diesem Verzeichnis in diesen Namespace:
-    * `helloweb-deployment.yaml`
+* Einen _Namespace_ erstellen mit Namen `hello-04`
+* Deploye das _Deployment_ aus den beiden .yaml Dateien aus diesem Verzeichnis in diesen _Namespace_:
+    * `helloweb-_Deployment_.yaml`
     * `helloweb-service.yaml`
+    * In den Objekten ist der neue _Namespace_ nicht konfiguriert. Um sie im _Namespace_ zu deployen muss Du entweder den _Namespace_ angeben `kubectl -n <namespace>` oder den Context für alle kubectl Befehle auf einen _Namespace_ setzen: `kubectl config set-context --current --namespace=<namespace>`
+    
 * Erkunde die erstelten Kubernetes Objekte
-* Erstelle ein Port Forwarding um auf den Service zugreifen zu können
-* Besuche den Service mit einen Browser oder `curl`
+* Erstelle ein _Port Forward_ um auf den im Pod laufenden Webservice zugreifen zu können. Versuche es direkt zum _Pod_ und über den _Service_.
+* Besuche den Webservice mit einen Browser oder `curl`
 
 ## (b) LoadBalancer Service
-* Ändere den Service so dass eine Service vom Typ `LoadBalancer` erstellt wird
+* Ändere das _Service_ Manifest, so dass eine _Service_ vom Typ `LoadBalancer` erstellt wird
 * Deploye die Änderung im Cluster
 * Aktiviere im Minikube die LoadBalancer Emulation (in einem anderen Terminal `minikube tunnel` ausführen)
 * Ermittle die externe IP des Loadbalancers
 * Greife direkt mit dem Browser auf die externe IP des Service zu.
 
-## (c) Environment und Secrets
-* Erstelle eine Secret mit Namen `helloweb` im Namespace `hello-04` die unter dem key `message` den Text "Kubernetes Workshop Hello App!" enthält.
-* Füge dem Container im Deployment helloweb eine Umgebungsvariable `HELLO_MESSAGE` hinzu, die aus dem o.a. Secret-Key gefüllt wird.
-* Ändere den Text im Secret. Überprüfe wie die App darauf regiert.
+## (c) Environment und _Secret_s
+* Erstelle eine _Secret_ mit Namen `helloweb` im _Namespace_ `hello-04` die unter dem key `message` den Text "Kubernetes Workshop Hello App!" enthält.
+* Füge dem Container im _Deployment_ helloweb eine Umgebungsvariable `HELLO_MESSAGE` hinzu, die aus dem o.a. _Secret_-Key gefüllt wird.
+Hinweis: die Syntax für eine Secret-Referenz findest Du hier: [https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables]
+* Ändere den Text im _Secret_. Überprüfe wie die App darauf reagiert.
+  (Es ist OK das Secret zu löschen und neu anzulegen, aber was müsste man tun um es zu ändern?)
 * Was ist zu tun damit der neue Text angezeigt wird.
 
-## (d) Scaling / Deployment
-* Scaliere das Deployment auf 5 Pods
-* Ändere den Container im Deployment auf das Tag `2.0` im yaml File
+## (d) Scaling / _Deployment_
+* Scaliere das _Deployment_ auf 5 Pods
+* Ändere den Container im _Deployment_ auf das Tag `2.0` im yaml File
 * Deploye die Änderung
-* Beobachte das Deployment
+* Beobachte das _Deployment_
+
+## Cleanup
+* Lösche am Ende der Übung den _Namespace_ und 
 
 ## Lösungen:
+Die Lösungen sind Baset64 kodiert um sie zu lesen
+  * Kodierten Text kopieren und z.B. hier Online Decodieren: [https://base64.guru/converter/decode]
+  * Kodierten Text in das Tool base64 pipen
+    `echo "<CODIERT>" | base64 -d
+  * Im VisualStudioCode Editor die Extension `vscode-base64` installieren. Dann kann man Base64 Text markieren und mit Ctrl-e Ctrl-d dekodieren (Ctrl-e Ctrl-e kodiert)
 ### (a) 
 
 ```
@@ -48,45 +60,36 @@ a3ViZWN0bCAtbiBoZWxsby0wNCBhcHBseSAtZiBoZWxsb3dlYi1zZXJ2aWNlLnlhbWwKa3ViZWN0bCAt
 ```
 
 ### (c)
-* create secret
+* create _Secret_
 ```
 a3ViZWN0bCAtbiBoZWxsby0wNCBjcmVhdGUgc2VjcmV0IGdlbmVyaWMgaGVsbG93ZWIgLS1mcm9tLWxpdGVyYWw9bWVzc2FnZT0nS3ViZXJuZXRlcyBXb3Jrc2hvcCBIZWxsbyBBcHAhJw==
 ```
-* `helloweb-secret.yaml` 
+* Oder als YAML Manifest `helloweb-secret.yaml` 
 ```yaml
 YXBpVmVyc2lvbjogdjEKa2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWU6IGhlbGxvd2ViCnN0cmluZ0RhdGE6CiAgbWVzc2FnZTogIkt1YmVybmV0ZXMgV29ya3Nob3AgSGVsbG8gQXBwISIKLS0tCmFwaVZlcnNpb246IHYxCmtpbmQ6IFNlY3JldAptZXRhZGF0YToKICBuYW1lOiBoZWxsb3dlYgp0eXBlOiBPcGFxdWUKZGF0YToKICBtZXNzYWdlOiBTM1ZpWlhKdVpYUmxjeUJYYjNKcmMyaHZjQ0JJWld4c2J5QkJjSEFo
 ```
 ```
-kubectl -n hello-04 apply -f helloweb-secret-yaml
+a3ViZWN0bCAtbiBoZWxsby0wNCBhcHBseSAtZiBoZWxsb3dlYi1zZWNyZXQteWFtbA==
 ```
 * helloweb-deployment.yaml
 ```yaml
 YXBpVmVyc2lvbjogYXBwcy92MQpraW5kOiBEZXBsb3ltZW50Cm1ldGFkYXRhOgogIG5hbWU6IGhlbGxvd2ViCiAgbGFiZWxzOgogICAgYXBwOiBoZWxsbwpzcGVjOgogIHNlbGVjdG9yOgogICAgbWF0Y2hMYWJlbHM6CiAgICAgIGFwcDogaGVsbG8KICAgICAgdGllcjogd2ViCiAgdGVtcGxhdGU6CiAgICBtZXRhZGF0YToKICAgICAgbGFiZWxzOgogICAgICAgIGFwcDogaGVsbG8KICAgICAgICB0aWVyOiB3ZWIKICAgIHNwZWM6CiAgICAgIGNvbnRhaW5lcnM6CiAgICAgIC0gbmFtZTogaGVsbG8tYXBwCiAgICAgICAgZW52OgogICAgICAgICAgLSBuYW1lOiBIRUxMT19NRVNTQUdFCiAgICAgICAgICAgIHZhbHVlRnJvbToKICAgICAgICAgICAgICBzZWNyZXRLZXlSZWY6CiAgICAgICAgICAgICAgICBuYW1lOiBoZWxsb3dlYgogICAgICAgICAgICAgICAga2V5OiBtZXNzYWdlCiAgICAgICAgaW1hZ2U6IGhhcmJvcjIuY3N2Y2Rldi52cGMuYXJ2YXRvLXN5c3RlbXMuZGUvazhzLXdvcmtzaG9wL2hlbGxvLXBocDoxLjAKICAgICAgICBwb3J0czoKICAgICAgICAtIGNvbnRhaW5lclBvcnQ6IDgw
 ```
-* `helloweb-secret.yaml` 
+* Neues `helloweb-secret.yaml` 
 ```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: helloweb
-stringData:
-  message: "<h1>Kubernetes Workshop Hello App!</h1><h2>Have a nice day</h2>"
+YXBpVmVyc2lvbjogdjEKa2luZDogX1NlY3JldF8KbWV0YWRhdGE6CiAgbmFtZTogaGVsbG93ZWIKc3RyaW5nRGF0YToKICBtZXNzYWdlOiAiPGgxPkt1YmVybmV0ZXMgV29ya3Nob3AgSGVsbG8gQXBwITwvaDE+PGgyPkhhdmUgYSBuaWNlIGRheTwvaDI+Ig==
 ```
+* Apply changed Secret
 ```sh
-kubectl -n hello-04 apply -f helloweb-secret-yaml
+a3ViZWN0bCAtbiBoZWxsby0wNCBhcHBseSAtZiBoZWxsb3dlYi1zZWNyZXQueWFtbA==
 ```
-* Delete Pod / Restart Deployment Rollout
+* Delete Pod / Restart _Deployment_ Rollout
 ```sh
-kubectl -n hello-04 get pods
-kubectl -n hello-04 delete pod  <pod>
-# or
-kubectl -n hello-04 delete pod -l app=hello -l tier=web
-# or
-kubectl -n hello-04 rollout restart deployment helloweb
+a3ViZWN0bCAtbiBoZWxsby0wNCBnZXQgcG9kcwprdWJlY3RsIC1uIGhlbGxvLTA0IGRlbGV0ZSBwb2QgIDxwb2Q+CiMgb3IKa3ViZWN0bCAtbiBoZWxsby0wNCBkZWxldGUgcG9kIC1sIGFwcD1oZWxsbyAtbCB0aWVyPXdlYgojIG9yCmt1YmVjdGwgLW4gaGVsbG8tMDQgcm9sbG91dCByZXN0YXJ0IGRlcGxveW1lbnQgaGVsbG93ZWI=
 ```
 ### (d) Scale
-* `kubectl -n hello-04 scale deployment helloweb --replicas=5`
-* `kubectl -n hello-04 set image deployment helloweb hello-app=harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:2.0`
-* `watch kubectl -n hello-04 get pods`
+* `a3ViZWN0bCAtbiBoZWxsby0wNCBzY2FsZSBkZXBsb3ltZW50IGhlbGxvd2ViIC0tcmVwbGljYXM9NQ==`
+* `a3ViZWN0bCAtbiBoZWxsby0wNCBzZXQgaW1hZ2UgZGVwbG95bWVudCBoZWxsb3dlYiBoZWxsby1hcHA9aGFyYm9yMi5jc3ZjZGV2LnZwYy5hcnZhdG8tc3lzdGVtcy5kZS9rOHMtd29ya3Nob3AvaGVsbG8tcGhwOjIuMA==`
+* `d2F0Y2gga3ViZWN0bCAtbiBoZWxsby0wNCBnZXQgcG9kcw==`
 
-### (e) 
+
