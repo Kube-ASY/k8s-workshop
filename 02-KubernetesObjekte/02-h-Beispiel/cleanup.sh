@@ -1,4 +1,3 @@
-kubectl delete ns kubectl-demo
+kubectl delete namespace guestbook
 
 kubectl config set-context --current --namespace=default
-

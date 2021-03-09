@@ -13,8 +13,6 @@ Nur über kubectl run
 ## Create Pod über YAML Manifest
 
     kubectl apply -f hello-pod.yaml
-
-
 ## YAML Code
 
 ```yaml

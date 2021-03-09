@@ -1,19 +1,29 @@
 # Übungen 2
 
+## Hinweis
+
+Diese Übungen sind für den Erstkontakt vielleicht schon etwas zu herausfordernd.
+Wenn Du nicht sofort weißt, was zu tun ist, ist es absolut in Ordnung die Lösungen zu entschlüsseln und nachzuvollziehen.
+Auch dabei entwickelt man ein Gefühl für die Arbeit mit einem Kubernetes Cluster. 
+Wenn Du nicht nur Cut'n Paste machen willst kannst du ja die Befehle teilweise abtippen.
+
 ## Hosting a Website with nginx
 
 Wir nehmen den nginx aus dem Guestbook Example und verwenden ihn um eine statische Website zu hosten.
 
 Im Ordner befinden sich
-* nginx-deployment.yaml
-* nginx-configmap.yaml
-* nginx-service.yaml
+* `nginx-deployment.yaml`
+* `nginx-configmap.yaml`
+* `nginx-service.yaml`
 
 ### (a) Basis Deplyoment + Ingress
 * Erstelle einen Namespace `website` und deploye diese Komponenten darin.
-* Setze den Current-Context deiner kubectl config auf diesen Namespace
+* Setze den Current-Context deiner kubectl config auf diesen Namespace (siehe Übung 1)
 
 * Erstelle wie in [05-g-Ingress](../05-KubernetesObjekte2/5-g-Ingress/) beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
+* Passe zum z.B. diesen Ingress aus der Demonstration entsprechend an:
+    * Konfiguriere den richtigen Hostnamen (URL)
+    * Ermittle Namen und Port des Service der angsprochen werden soll
     * `helloweb-ingress.yaml`
     ```yaml
     apiVersion: networking.k8s.io/v1
@@ -38,6 +48,7 @@ Im Ordner befinden sich
   ```bash
   echo "$(minikube ip) website.k8s-workshop.info" | sudo tee -a /etc/hosts
   ```
+  * Oder manuell in die /etc/hosts eintragen (`sudo vi`)
 
 *Wenn hier ein HTTP-404 kommt ist alles OK*
 
@@ -47,19 +58,19 @@ Darum kümmern wir uns jetzt.
 
 
 ### (b) Ein Volume die Website zu hosten
-* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen nginx-website und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [dynamic-www-pvc.yaml](../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml)
+* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen `nginx-website` und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [dynamic-www-pvc.yaml](../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml)
 * Modifizieren das nginx-deployment und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes) [nginx-pvc-pod.yaml](../05-KubernetesObjekte2/05-d-Volumes/nginx-pvc-pod.yaml)
 * Deploye das modifizierte nginx-deployment
 * Was ist jetzt zu sehen?
-  Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
+  => Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
 
 ### (c) Manuelles Deployment der Website
 
-* Kopiere den Inhalt des Ordners website in den laufenden Container unter /website/htdocs
-* Tip: probiere `kubectl cp`Befehl einmal aus, aber es ist nicht schandhaft jetzt mal kurz in die Lösung zu schauen, der Befehl ist tricky.
-* Du kannst das Ergebnis prüfen wenn Du per `kubectl exec` die Verzeichnisse listest.
+* Kopiere den Inhalt des Ordners website in den laufenden Container unter `/website/htdocs`
+* Tip: probiere `kubectl cp` Befehl einmal aus, aber es ist nicht schandhaft jetzt mal kurz in die Lösung zu schauen, der Befehl ist tricky.
+* Du kannst das Ergebnis prüfen wenn Du per `kubectl exec` die Verzeichnisse im Container listest.
 * Schaue Dir jetzt mal Deine Website im Browser an. 
-  Der 404 sollte jetzt einer richtigen Website gewichen sein.
+  => Der 404 sollte jetzt einer richtigen Website gewichen sein.
 
 ### (d) Automatisches Deployment per InitContainer
 
