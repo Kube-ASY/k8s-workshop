@@ -9,11 +9,13 @@ Zwischen den Übungen empfiehlt es sich mit den Scripten
 
 Einen sauberen Stand zu erzeugen.
 
+Wenn ihr nicht weiterkommt, nehmt die Lösungen zur Hand und arbeitet sie durch und versucht es vielleicht in ein paar Tagen noch mal ohne.
+
 ## (a) Warmup
 
 ### Setup
 
-* Erstelle den Namespace k8s-workshop mit dem Script
+* Erstelle den Namespace `k8s-trouble` mit dem Script
   `./create-namespace.sh`
 * Deploye die yaml Manifeste im Verzeichnis 08-a-warmup:
   `kubectl apply -f ./08-a-warmup`
@@ -36,13 +38,17 @@ Das Ergebnis siehst Du im Cluster. Von der alten Version läuft noch ein Pod, ab
 
 ### Rolle das Deployment zurück. Benutze dazu nur kubectl !
 
+* Tip: Wer nicht sofort weiß worauf das hinausläuft schaut sich nochmal die Folie im Kapitel 3 an mit dem Titel _kubectl - Deploy_
+
 ## (c) ReadyOrNot
 ### Setup
 * CleanUP: `./cleanup.sh ; ./create-namespace.sh`
 * `kubectl apply -f ./08-c-readyornot`
 
 Schaue Dir die Pods an. Es sieht so aus als würde der Container immer wieder restartet.
-Was ist die Ursache, wo liegt der Fehler
+Was ist die Ursache, wo liegt der Fehler.
+
+* Tip: der Code für den Container liegt unter `app/hello-php/docker` in der `index.php` kann man vielleicht erkennen was für URLs gültig sind.
 
 
 ## (d) OhOh
@@ -52,6 +58,8 @@ Was ist die Ursache, wo liegt der Fehler
 
 Schaue Dir die Pods an. Es sieht so aus als würde der Container immer wieder restartet.
 Was ist die Ursache, wo liegt der Fehler?
+
+* Wie würde man bei völliger Unkenntnis über die Workload und einen ausreichend großen Cluster sinnvolle Werte für die container Resource requests+limites ermitteln.
 
 ## (e) LongWay
 
@@ -100,16 +108,16 @@ YXBpVmVyc2lvbjogYXBwcy92MQpraW5kOiBEZXBsb3ltZW50Cm1ldGFkYXRhOgogIG5hbWU6IGhlbGxv
 
 ## (d) OhOh
 
-RGVyIENvbnRhaW5lciB3aXJkIGxhdWZlbmQgUmVzdGFydGVkLiBFaW4gYGt1YmVjdGwgZGVzY3JpYmUgcG9kYCB6ZWlndCwgZGFzcyBkZXIgVm9yZ8OkbmdlciBlaW4gT09NS2lsbGVkIEV2ZW50IHplaWd0LiBELmguIGRhcyBrb25maWd1cmllcnRlIE1lbW9yeSBMaW1pdCB2b24gMTAwTWkgd2lyZCDDvGJlcnNjaHJpdHRlbi4KCkRhIHdpciBub2NoIG5pY2h0IHdpc3NlbiB3aWUgdmllbCBSQU0gZGVyIENvbnRhaW5lciB3aXJrbGljaCBicmF1Y2h0IG11c3MgbWFuIGlobiBudXIgYW5hbHlzaWVyZW4uIEVzIHdpcmQgc2ljaCB6ZWlnZW4sIGRhc3MgMTIwTWkgZGF1ZXJoYWZ0IGJlbsO2dGlndCB3ZXJkZW4uIApBbnBhc3N1bmcgZGVyIE1lbW9yeSBQYXJhbWV0ZXIgd8OkcmUgc2lubnZvbGwgYXVmOg==
-
+RGVyIENvbnRhaW5lciB3aXJkIGxhdWZlbmQgUmVzdGFydGVkLiBFaW4gYGt1YmVjdGwgZGVzY3JpYmUgcG9kYCB6ZWlndCwgZGFzcyBkZXIgVm9yZ8OkbmdlciBlaW4gT09NS2lsbGVkIEV2ZW50IHplaWd0LiBELmguIGRhcyBrb25maWd1cmllcnRlIE1lbW9yeSBMaW1pdCB2b24gMTAwTWkgd2lyZCDDvGJlcnNjaHJpdHRlbi4KCkRhIHdpciBub2NoIG5pY2h0IHdpc3NlbiB3aWUgdmllbCBSQU0gZGVyIENvbnRhaW5lciB3aXJrbGljaCBicmF1Y2h0IG11c3MgbWFuIGlobiBhbmFseXNpZXJlbi4gCldlbm4gbWFuIFJBTSBnZW51ZyBoYXQga2FubiBtYW4gZGFzIExpbWl0IHNlaHIgaG9jaCBzZXR6ZW4gei5CLiAyR2kuCk1pdCBga3ViZWN0bCB0b3AgcG9kc2Aga2FubiBtYW4gZGFubiBkZW4gVmVyYnJhdWNoIHNlaGVuIChuYWNoIGVpbiBwYWFyIE1pbnV0ZW4pCkVzIHdpcmQgc2ljaCB6ZWlnZW4sIGRhc3MgY2EuIDUwME1pIGRhdWVyaGFmdCBiZW7DtnRpZ3Qgd2VyZGVuLiBEYXMgd8OkcmUgZGFubiBkZXIgU3RhcnRwdW5rdCBmw7xyIGRlbiBgcmVxdWVzdHMubWVtb3J5YCBXZXJ0LiBEYXMgTGltaXQgd8O8cmRlIG1hbiBjYS4gRmFrdG9yIDIoMykgZGFyw7xiZXIgYW5zZXR6ZW4uCg==
 
 ```yaml
-YXBpVmVyc2lvbjogYXBwcy92MQpraW5kOiBEZXBsb3ltZW50Cm1ldGFkYXRhOgogIG5hbWU6IHdvcmtsb2FkCnNwZWM6CiAgc2VsZWN0b3I6CiAgICBtYXRjaExhYmVsczoKICAgICAgYXBwOiB3b3JrbG9hZAogIHJlcGxpY2FzOiAxCiAgdGVtcGxhdGU6CiAgICBtZXRhZGF0YToKICAgICAgbGFiZWxzOgogICAgICAgIGFwcDogd29ya2xvYWQKICAgIHNwZWM6CiAgICAgIGNvbnRhaW5lcnM6CiAgICAgICAgLSBuYW1lOiB3b3JrbG9hZAogICAgICAgICAgaW1hZ2U6IGhhcmJvcjIuY3N2Y2Rldi52cGMuYXJ2YXRvLXN5c3RlbXMuZGUvazhzLXdvcmtzaG9wL3dvcmtsb2FkOjEuMAogICAgICAgICAgcmVzb3VyY2VzOgogICAgICAgICAgICByZXF1ZXN0czoKICAgICAgICAgICAgICBtZW1vcnk6ICIxMjBNaSIKICAgICAgICAgICAgbGltaXRzOgogICAgICAgICAgICAgIG1lbW9yeTogIjI0ME1pIg==
+YXBpVmVyc2lvbjogYXBwcy92MQpraW5kOiBEZXBsb3ltZW50Cm1ldGFkYXRhOgogIG5hbWU6IHdvcmtsb2FkCnNwZWM6CiAgc2VsZWN0b3I6CiAgICBtYXRjaExhYmVsczoKICAgICAgYXBwOiB3b3JrbG9hZAogIHJlcGxpY2FzOiAxCiAgdGVtcGxhdGU6CiAgICBtZXRhZGF0YToKICAgICAgbGFiZWxzOgogICAgICAgIGFwcDogd29ya2xvYWQKICAgIHNwZWM6CiAgICAgIGNvbnRhaW5lcnM6CiAgICAgICAgLSBuYW1lOiB3b3JrbG9hZAogICAgICAgICAgaW1hZ2U6IGhhcmJvcjIuY3N2Y2Rldi52cGMuYXJ2YXRvLXN5c3RlbXMuZGUvazhzLXdvcmtzaG9wL3dvcmtsb2FkOjEuMAogICAgICAgICAgcmVzb3VyY2VzOgogICAgICAgICAgICByZXF1ZXN0czoKICAgICAgICAgICAgICBtZW1vcnk6ICI1MDBNaSIKICAgICAgICAgICAgbGltaXRzOgogICAgICAgICAgICAgIG1lbW9yeTogIjEwMDBNaSI=
 ```
 
 ## (e) LongWay
 
 Hier ist systematisches Troubleshooting angesagt. Am besten Bottom-UP.
+
 
 ### Container
 
