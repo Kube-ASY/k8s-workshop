@@ -14,7 +14,17 @@ wget https://github.com/kubernetes/minikube/releases/download/${MINIKUBE}/miniku
 
 sudo install /tmp/minikube /usr/local/bin/
 
+minikube delete
+
+docker system prune -a
+
 minikube start --kubernetes-version=$K8S
+
+minikube addons enable metrics-server
+minikube addons enable dashboard
+minikube addons enable storage-provisioner
+minikube addons enable default-storageclass
+minikube addons enable ingress
 
 
 
