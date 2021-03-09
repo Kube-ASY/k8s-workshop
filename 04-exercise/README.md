@@ -1,17 +1,24 @@
 # Übungen 1
 
+## Hinweis
+
+Die Übungen sind für den Erstkontakt vielleicht schon etwas zu herausfordernd.
+Wenn Du nicht sofort weißt was zu tun ist, ist es absolut in Ordnung die Lösungen zu entschlüsseln und zu implementieren.
+Auch dabei entwickelt man ein Gefühl für die Arbeit mit einem Kubernetes Cluster. 
+Wenn Du nicht nur Cut'n Paste machen willst kannst du ja die Befehle teilweise abtippen.
+
 ## (a) _Deployment_ der hello-app
 
 Deploye die hello-app in diesem Verzeichnis in dem Du 
 * Einen _Namespace_ erstellen mit Namen `hello-04`
 * Deploye das _Deployment_ aus den beiden .yaml Dateien aus diesem Verzeichnis in diesen _Namespace_:
-    * `helloweb-_Deployment_.yaml`
+    * `helloweb-deployment.yaml`
     * `helloweb-service.yaml`
-    * In den Objekten ist der neue _Namespace_ nicht konfiguriert. Um sie im _Namespace_ zu deployen muss Du entweder den _Namespace_ angeben `kubectl -n <namespace>` oder den Context für alle kubectl Befehle auf einen _Namespace_ setzen: `kubectl config set-context --current --namespace=<namespace>`
+    * In den Objekten ist der neue _Namespace_ nicht konfiguriert. Um sie im _Namespace_ `hello-04` zu deployen muss Du entweder den _Namespace_ bei jedem Befehl angeben `kubectl -n <namespace>` oder den Context für alle kubectl Befehle auf einen _Namespace_ setzen: `kubectl config set-context --current --namespace=<namespace>` (empfohlen)
     
-* Erkunde die erstelten Kubernetes Objekte
-* Erstelle ein _Port Forward_ um auf den im Pod laufenden Webservice zugreifen zu können. Versuche es direkt zum _Pod_ und über den _Service_.
-* Besuche den Webservice mit einen Browser oder `curl`
+* Erkunde die erstelten Kubernetes Objekte (Pods,Deployment,ReplicaSet,Service)
+* Erstelle ein _Port Forward_ um auf den im Pod laufenden Webservice zugreifen zu können. Nehme als lokalen Port `8080`, der Port im Container bzw. Service ist `80`. Versuche es direkt zum _Pod_ und über den _Service_.
+* Besuche den Webservice mit einen Browser oder `curl` in dem Du auf den durch den port-forward auf localhost geöffneten Port 
 
 ## (b) LoadBalancer Service
 * Ändere das _Service_ Manifest, so dass eine _Service_ vom Typ `LoadBalancer` erstellt wird
@@ -21,7 +28,7 @@ Deploye die hello-app in diesem Verzeichnis in dem Du
 * Greife direkt mit dem Browser auf die externe IP des Service zu.
 
 ## (c) Environment und _Secret_s
-* Erstelle eine _Secret_ mit Namen `helloweb` im _Namespace_ `hello-04` die unter dem key `message` den Text "Kubernetes Workshop Hello App!" enthält.
+* Erstelle ein _Secret_ mit Namen `helloweb` im _Namespace_ `hello-04` die unter dem key `message` den Text "Kubernetes Workshop Hello App!" enthält.
 * Füge dem Container im _Deployment_ helloweb eine Umgebungsvariable `HELLO_MESSAGE` hinzu, die aus dem o.a. _Secret_-Key gefüllt wird.
 Hinweis: die Syntax für eine Secret-Referenz findest Du hier: [https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables]
 * Ändere den Text im _Secret_. Überprüfe wie die App darauf reagiert.
@@ -35,7 +42,8 @@ Hinweis: die Syntax für eine Secret-Referenz findest Du hier: [https://kubernet
 * Beobachte das _Deployment_
 
 ## Cleanup
-* Lösche am Ende der Übung den _Namespace_ und 
+* Lösche am Ende der Übung den _Namespace_ `hello-04` 
+* (siehe auch das Script `cleanup.sh`) 
 
 ## Lösungen:
 Die Lösungen sind Baset64 kodiert um sie zu lesen
@@ -56,7 +64,6 @@ YXBpVmVyc2lvbjogdjEKa2luZDogU2VydmljZQptZXRhZGF0YToKICBuYW1lOiBoZWxsb3dlYgogIGxh
 
 ```bash
 a3ViZWN0bCAtbiBoZWxsby0wNCBhcHBseSAtZiBoZWxsb3dlYi1zZXJ2aWNlLnlhbWwKa3ViZWN0bCAtbiBoZWxsby0wNCBnZXQgc2VydmljZSBoZWxsb3dlYgo9PiBtaW5pa3ViZSB0dW5uZWw=
-
 ```
 
 ### (c)
