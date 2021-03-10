@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19.1
         imagePullPolicy: Always
         resources:
           requests:

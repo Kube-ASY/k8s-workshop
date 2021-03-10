@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: phpfpm
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v6
+        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v8
         imagePullPolicy: Always
         resources:
           requests:
