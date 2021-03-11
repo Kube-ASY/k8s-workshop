@@ -59,14 +59,14 @@ Darum kümmern wir uns jetzt.
 
 ### (b) Ein Volume die Website zu hosten
 * Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen `nginx-website` und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [dynamic-www-pvc.yaml](../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml)
-* Modifizieren das nginx-deployment und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes) [nginx-pvc-pod.yaml](../05-KubernetesObjekte2/05-d-Volumes/nginx-pvc-pod.yaml)
+* Modifizieren das `nginx-deployment.yaml` und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes) [nginx-pvc-pod.yaml](../05-KubernetesObjekte2/05-d-Volumes/nginx-pvc-pod.yaml)
 * Deploye das modifizierte nginx-deployment
 * Was ist jetzt zu sehen?
   => Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
 
 ### (c) Manuelles Deployment der Website
 
-* Kopiere den Inhalt des Ordners website in den laufenden Container unter `/website/htdocs`
+* Kopiere den Inhalt des Ordners `website` im Root des Repos (`~/k8s-workshop/website`) in den laufenden Container unter `/website/htdocs`
 * Tip: probiere `kubectl cp` Befehl einmal aus, aber es ist nicht schandhaft jetzt mal kurz in die Lösung zu schauen, der Befehl ist tricky.
 * Du kannst das Ergebnis prüfen wenn Du per `kubectl exec` die Verzeichnisse im Container listest.
 * Schaue Dir jetzt mal Deine Website im Browser an. 
