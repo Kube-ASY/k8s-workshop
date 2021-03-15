@@ -2,5 +2,5 @@ FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y stress
 
-ENTRYPOINT ["/usr/bin/stress", "--vm", "1", "--vm-bytes", "500M", "--vm-hang", "1"]
+ENTRYPOINT ["/usr/bin/stress", "--vm", "2", "--vm-bytes", "300M", "--vm-hang", "1"]
 CMD []
