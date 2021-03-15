@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: stress
-          image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/stress:latest
+          image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/stress:latest
           resources:
             requests:
               memory: "4Gi"

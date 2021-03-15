@@ -76,7 +76,7 @@ Darum kümmern wir uns jetzt.
 
 * Lösche jetzt einmal das PVC und das Deployment
 * Erstelle das PVC neu
-* Füge dem nginx Deployment einen InitContainer (mit dem /website Volume) auf Basis des Image `harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/git:latest` hinzu der beim Start die folgenden Befehle ausführt:
+* Füge dem nginx Deployment einen InitContainer (mit dem /website Volume) auf Basis des Image `harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/git:latest` hinzu der beim Start die folgenden Befehle ausführt:
   ```yaml
         command:
           - "sh"

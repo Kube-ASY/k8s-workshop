@@ -9,7 +9,7 @@ spec:
   imagePullSecrets:
     - name: myregistrykey
   containers:
-  - image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
+  - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
     imagePullPolicy: Always
     name: busybox
     command:

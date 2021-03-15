@@ -24,6 +24,6 @@ spec:
               secretKeyRef:
                 name: helloweb
                 key: message
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
         ports:
         - containerPort: 80

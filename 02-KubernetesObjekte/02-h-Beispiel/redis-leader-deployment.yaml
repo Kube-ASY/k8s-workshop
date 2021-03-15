@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: leader
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
         resources:
           requests:
             cpu: 100m

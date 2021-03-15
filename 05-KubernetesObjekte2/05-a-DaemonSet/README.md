@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: hello-app
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
         ports:
         - containerPort: 8080
 ```

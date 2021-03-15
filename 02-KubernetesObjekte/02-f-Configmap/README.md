@@ -17,7 +17,7 @@ data:
 spec:
   containers:
   - name: hello-app
-    image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
+    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
     ports:
     - containerPort: 80
     env:
@@ -63,7 +63,7 @@ data:
 spec:
   containers:
   - name: nginx
-    image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19
+    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19
     imagePullPolicy: Always
     resources:
       requests:
