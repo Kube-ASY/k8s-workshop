@@ -1,4 +1,4 @@
-FROM alpine:3
+FROM alpine:20210212
 
 USER root
 RUN apk -U add git curl
