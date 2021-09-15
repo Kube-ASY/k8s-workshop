@@ -16,6 +16,7 @@ Wenn ihr nicht weiterkommt, nehmt die Lösungen zur Hand und arbeitet sie durch 
 ### Setup
 
 * Erstelle den Namespace `k8s-trouble` mit dem Script
+
   `./create-namespace.sh`
 * Deploye die yaml Manifeste im Verzeichnis 08-a-warmup:
   `kubectl apply -f ./08-a-warmup`
@@ -65,7 +66,8 @@ Was ist die Ursache, wo liegt der Fehler?
 
 ### Setup
 * CleanUP: `./cleanup.sh ; ./create-namespace.sh`
-* `kubectl apply -f ./08-f-longway`
+
+* `kubectl apply -f ./08-e-longway`
 
 Die Website die hier deployed wird scheint nicht erreichbar zu sein:
 
