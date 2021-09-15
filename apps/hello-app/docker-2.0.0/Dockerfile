@@ -1,6 +1,8 @@
 FROM golang:1.17-alpine
-ADD . /go/src/hello-app
-RUN go install hello-app
+WORKDIR /go/src/hello-app
+COPY . .
+RUN go get -d -v ./...
+RUN go install -v ./...
 
 FROM alpine:latest
 COPY --from=0 /go/bin/hello-app .
