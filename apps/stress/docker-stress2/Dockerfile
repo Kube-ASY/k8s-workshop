@@ -1,5 +1,5 @@
 # Container to build stress
-FROM golang:1.15 AS builder
+FROM golang:1.17 AS builder
 
 LABEL maintainer="vishnuk@google.com"
 
