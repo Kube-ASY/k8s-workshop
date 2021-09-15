@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: liveness
-    image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/liveness:latest
+    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/liveness:latest
     args:
     - /server
     livenessProbe:

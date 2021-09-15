@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: gb-phpfpm
 spec:
-  replicas: 1
   selector:
     matchLabels:
         app: guestbook
@@ -16,10 +15,8 @@ spec:
     spec:
       containers:
       - name: phpfpm
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v5
-        env:
-        - name: GET_HOSTS_FROM
-          value: "env"
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-phpfpm:v8
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: 10m

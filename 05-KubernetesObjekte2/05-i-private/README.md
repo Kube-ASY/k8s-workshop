@@ -7,7 +7,7 @@ Secrets vom Typ `docker-registry`
 
 ```bash
 kubectl create secret docker-registry myregistrykey \
-  --docker-server=harbor2.csvcdev.vpc.arvato-systems.de \
+  --docker-server=harbor.csvcdev.vpc.arvato-systems.de \
   --docker-username='robot$private' \
   --docker-password=$RPWD
 ```
@@ -25,7 +25,7 @@ spec:
   imagePullSecrets:
     - name: myregistrykey
   containers:
-  - image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
+  - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
     imagePullPolicy: Always
     name: busybox
     command:

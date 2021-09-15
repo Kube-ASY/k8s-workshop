@@ -56,7 +56,7 @@ spec:
     spec:
       initContainers:
       - name: init-redis
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
         command:
         - bash
         - "-c"
@@ -79,7 +79,7 @@ spec:
           mountPath: /mnt/config-map
       containers:
       - name: redis
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/redis:6.0
         command:
           - "redis-server"
           - "/etc/redis.conf"

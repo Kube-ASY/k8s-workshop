@@ -17,7 +17,7 @@
 
 ### Deploy sample application
 ```bash
-kubectl apply -f helloweb-deployment -f helloweb-service.yaml
+kubectl apply -f helloweb-deployment.yaml -f helloweb-service.yaml
 ```
 ### Create a Ingress resource
 ```yaml
@@ -33,10 +33,10 @@ rules:
         - path: /
             pathType: Prefix
             backend:
-            service:
+              service:
                 name: helloweb
                 port:
-                number: 80
+                  number: 80
 ```
    
 ```bash

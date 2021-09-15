@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export HARBOR=harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop
+export HARBOR=harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop
 
 
 docker pull k8s.gcr.io/liveness

@@ -10,7 +10,7 @@ spec:
     - name: myregistrykey
   containers:
   - name: liveness
-    image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox
+    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
     args:
     - /bin/sh
     - -c
@@ -22,3 +22,4 @@ spec:
         - /tmp/healthy
       initialDelaySeconds: 5
       periodSeconds: 5
+      

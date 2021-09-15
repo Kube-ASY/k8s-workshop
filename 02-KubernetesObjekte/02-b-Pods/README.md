@@ -4,7 +4,7 @@
 
 Nur über kubectl run
 
-    kubectl run hello-app --image=harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
+    kubectl run hello-app --image=harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
 
     kubectl get pods
 
@@ -13,8 +13,6 @@ Nur über kubectl run
 ## Create Pod über YAML Manifest
 
     kubectl apply -f hello-pod.yaml
-
-
 ## YAML Code
 
 ```yaml
@@ -28,7 +26,7 @@ metadata:
 spec:
   initContainers: []
   containers:
-  - image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
+  - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
     imagePullPolicy: IfNotPresent
     name: hello-app
     volumeMounts: []  

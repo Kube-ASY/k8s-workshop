@@ -24,12 +24,10 @@ require 'Predis/Autoloader.php';
 Predis\Autoloader::register();
 
 if (isset($_GET['cmd']) === true) {
-  $host = 'redis-0.redis';
-  if (getenv('GET_HOSTS_FROM') == 'env') {
-    $host = getenv('REDIS_LEADER_SERVICE_HOST');
-  }
+  $host = 'redis-leader';
+
   header('Content-Type: application/json');
-  if ($_GET['cmd'] == 'set') {
+  if ( $_GET['cmd'] == 'set' ) {
     $client = new Predis\Client([
       'scheme' => 'tcp',
       'host'   => $host,
@@ -39,10 +37,9 @@ if (isset($_GET['cmd']) === true) {
     $client->set($_GET['key'], $_GET['value']);
     print('{"message": "Updated"}');
   } else {
-    $host = 'redis';
-    if (getenv('GET_HOSTS_FROM') == 'env') {
-      $host = getenv('REDIS_FOLLOWER_SERVICE_HOST');
-    }
+
+    $host = 'redis-follower';
+    
     $client = new Predis\Client([
       'scheme' => 'tcp',
       'host'   => $host,

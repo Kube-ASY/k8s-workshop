@@ -1,18 +1,54 @@
 # Übungen 2
 
+## Hinweis
+
+Diese Übungen sind für den Erstkontakt vielleicht schon etwas zu herausfordernd.
+Wenn Du nicht sofort weißt, was zu tun ist, ist es absolut in Ordnung die Lösungen zu entschlüsseln und nachzuvollziehen.
+Auch dabei entwickelt man ein Gefühl für die Arbeit mit einem Kubernetes Cluster. 
+Wenn Du nicht nur Cut'n Paste machen willst kannst du ja die Befehle teilweise abtippen.
+
 ## Hosting a Website with nginx
 
 Wir nehmen den nginx aus dem Guestbook Example und verwenden ihn um eine statische Website zu hosten.
 
 Im Ordner befinden sich
-* nginx-deployment.yaml
-* nginx-configmap.yaml
-* nginx-service.yaml
+* `nginx-deployment.yaml`
+* `nginx-configmap.yaml`
+* `nginx-service.yaml`
 
 ### (a) Basis Deplyoment + Ingress
 * Erstelle einen Namespace `website` und deploye diese Komponenten darin.
+* Setze den Current-Context deiner kubectl config auf diesen Namespace (siehe Übung 1)
 
-* Erstelle wie in 5-f Beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
+* Erstelle wie in [05-g-Ingress](../05-KubernetesObjekte2/5-g-Ingress/) beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
+* Passe zum z.B. diesen Ingress aus der Demonstration entsprechend an:
+    * Konfiguriere den richtigen Hostnamen (URL)
+    * Ermittle Namen und Port des Service der angsprochen werden soll
+    * `helloweb-ingress.yaml`
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: helloweb
+    spec:
+      rules:
+        - host: hello-world.info
+          http:
+            paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: helloweb
+                    port:
+                      number: 80
+    ```
+
+  * Hosts Eintrag:
+  ```bash
+  echo "$(minikube ip) website.k8s-workshop.info" | sudo tee -a /etc/hosts
+  ```
+  * Oder manuell in die /etc/hosts eintragen (`sudo vi`)
 
 *Wenn hier ein HTTP-404 kommt ist alles OK*
 
@@ -22,20 +58,25 @@ Darum kümmern wir uns jetzt.
 
 
 ### (b) Ein Volume die Website zu hosten
-* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen nginx-website und 1GB Größe
-* Modifizieren das nginx-deployment und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website`
+* Erstelle jetzt ein PVC (PersistentVolumeClaim) mit Namen `nginx-website` und 1GB Größe und der StorageClass `standard`  siehe dynamic-www-pvc.yaml in [dynamic-www-pvc.yaml](../05-KubernetesObjekte2/05-d-Volumes/dynamic-www-pvc.yaml)
+* Modifizieren das `nginx-deployment.yaml` und mounte den Inhalt dieses Volume im Container unter dem Pfad `/website` (vgl. `nginx-pvc-pod.yaml` aus 05-d-Volumes) [nginx-pvc-pod.yaml](../05-KubernetesObjekte2/05-d-Volumes/nginx-pvc-pod.yaml)
 * Deploye das modifizierte nginx-deployment
-* Was ist jetzt zu sehen.
+* Was ist jetzt zu sehen?
+  => Natürlich immer noch ein 404, das neue Volume ist ja noch leer!
 
 ### (c) Manuelles Deployment der Website
 
-* Kopiere den Inhalt des Ordners website in den laufenden Container unter /website/htdocs
+* Kopiere den Inhalt des Ordners `website` im Root des Repos (`~/k8s-workshop/website`) in den laufenden Container unter `/website/htdocs`
+* Tip: probiere `kubectl cp` Befehl einmal aus, aber es ist nicht schandhaft jetzt mal kurz in die Lösung zu schauen, der Befehl ist tricky.
+* Du kannst das Ergebnis prüfen wenn Du per `kubectl exec` die Verzeichnisse im Container listest.
+* Schaue Dir jetzt mal Deine Website im Browser an. 
+  => Der 404 sollte jetzt einer richtigen Website gewichen sein.
 
 ### (d) Automatisches Deployment per InitContainer
 
-* Lösche das PVC und das Deployment
+* Lösche jetzt einmal das PVC und das Deployment
 * Erstelle das PVC neu
-* Füge dem nginx Deployment einen InitContainer (mit dem /website Volume) auf Basis des Image `harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/git:latest` hinzu der beim Start die folgenden Befehle ausführt:
+* Füge dem nginx Deployment einen InitContainer (mit dem /website Volume) auf Basis des Image `harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/git:latest` hinzu der beim Start die folgenden Befehle ausführt:
   ```yaml
         command:
           - "sh"
@@ -49,6 +90,8 @@ Darum kümmern wir uns jetzt.
                git pull ; \
              fi"
   ```
+* Rufe die Logs des initContainers ab
+
 
 ### (e) [Optional] SideCar
 
@@ -61,7 +104,7 @@ Füge noch einen SideCar Container hinzu der das website Repo all 5min updated
 
 * Namespace
 ```yaml
-a3ViZWN0bCBjcmVhdGUgbnMgd2Vic2l0ZQoKa3ViZWN0bCBjb25maWcgc2V0LWNvbnRleHQgLS1jdXJyZW50IC0tbmFtZXNwYWNlPXdlYnNpdGUKCmt1YmVjdGwgZGVwbG95IC1mIG5naW54LWNvbmZpZ21hcC55YW1sIC1mIG5naW54LWRlcGxveW1lbnQueWFtbCAtZiBuZ2lueC1zZXJ2aWNlLnlhbWw=
+a3ViZWN0bCBjcmVhdGUgbnMgd2Vic2l0ZQoKa3ViZWN0bCBjb25maWcgc2V0LWNvbnRleHQgLS1jdXJyZW50IC0tbmFtZXNwYWNlPXdlYnNpdGUKCmt1YmVjdGwgYXBwbHkgLWYgbmdpbngtY29uZmlnbWFwLnlhbWwgLWYgbmdpbngtZGVwbG95bWVudC55YW1sIC1mIG5naW54LXNlcnZpY2UueWFtbA==
 ```
 
 * `nginx-ingress.yaml`
@@ -83,7 +126,7 @@ ICBhcGlWZXJzaW9uOiBhcHBzL3YxCiAga2luZDogRGVwbG95bWVudAogIG1ldGFkYXRhOgogICAgbmFt
 ### (c)
 * kubectl cp 
   ```bash
-  a3ViZWN0bCBjcCB3ZWJzaXRlIDxQT0Q+Oi93ZWJzaXRlL2h0ZG9jcw==
+  kubectl cp website <POD>:/website/htdocs
   ```
 
 ### (d)

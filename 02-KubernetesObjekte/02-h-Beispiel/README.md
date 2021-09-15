@@ -17,3 +17,25 @@
 ## nginx
 
 * vhost Config aus ConfigMap
+
+# Setup
+
+## Namespace + Objekte installieren
+
+```bash
+./create-namespace.sh
+
+kubectl apply -f .
+
+watch kubectl get pods,deployment,service
+```
+
+## Objekte erforschen
+
+* wie funktioniert der Redis Cluster (Container Command + Args )
+* Wie funktioniert das Deployment (-> Umgebungsvariable)
+* Wie funktioniert der Proxy (ConfigMap Volume)
+
+# Cleanup
+
+`./cleanup.sh`

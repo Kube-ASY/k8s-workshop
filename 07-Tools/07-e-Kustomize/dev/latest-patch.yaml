@@ -7,5 +7,5 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:latest
+        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:latest
 

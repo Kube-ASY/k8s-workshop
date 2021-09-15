@@ -9,7 +9,7 @@ spec:
     - name: myregistrykey
   containers:
   - name: readiness
-    image: harbor2.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox
+    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
     args:
     - /bin/sh
     - -c
