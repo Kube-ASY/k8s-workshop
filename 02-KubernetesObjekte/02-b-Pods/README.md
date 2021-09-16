@@ -2,7 +2,7 @@
 
 ## Create Pod with kubectl
 
-Nur über kubectl run
+Über `kubectl run`
 
     kubectl run hello-app --image=harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:1.0
 

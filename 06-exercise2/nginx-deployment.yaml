@@ -13,23 +13,23 @@ spec:
         app: website
     spec:
       containers:
-      - name: nginx
-        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.19.1
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            cpu: 10m
-            memory: 100Mi
-        ports:
-        - containerPort: 8080
-          name: http
-        volumeMounts:
-          - name: nginx-conf
-            mountPath: /opt/bitnami/nginx/conf/server_blocks
+        - name: nginx
+          image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/gb-nginx:1.21.3
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 10m
+              memory: 100Mi
+          ports:
+            - containerPort: 8080
+              name: http
+          volumeMounts:
+            - name: nginx-conf
+              mountPath: /opt/bitnami/nginx/conf/server_blocks
       volumes:
         - name: nginx-conf
           configMap: 
             name: nginx-config
             items:
-            - key: vhost.conf
-              path: website-vhost.conf
+              - key: vhost.conf
+                path: website-vhost.conf

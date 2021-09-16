@@ -9,17 +9,17 @@ spec:
   imagePullSecrets:
     - name: myregistrykey
   containers:
-  - name: liveness
-    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
-    args:
-    - /bin/sh
-    - -c
-    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
-    livenessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
+    - name: liveness
+      image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
+      args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
       

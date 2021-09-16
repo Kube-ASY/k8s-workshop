@@ -8,16 +8,16 @@ spec:
   imagePullSecrets:
     - name: myregistrykey
   containers:
-  - name: readiness
-    image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
-    args:
-    - /bin/sh
-    - -c
-    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
-    readinessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
+    - name: readiness
+      image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/busybox
+      args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+      readinessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5

@@ -9,13 +9,13 @@ spec:
   - name: liveness
     image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/liveness:latest
     args:
-    - /server
+      - /server
     livenessProbe:
       httpGet:
         path: /healthz
         port: 8080
         httpHeaders:
-        - name: Custom-Header
-          value: Awesome
+          - name: Custom-Header
+            value: Awesome
       initialDelaySeconds: 3
       periodSeconds: 3

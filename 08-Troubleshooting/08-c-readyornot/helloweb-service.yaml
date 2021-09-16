@@ -9,6 +9,6 @@ spec:
     app: hello
     tier: web
   ports:
-  - port: 80
-    targetPort: 80
+    - port: 80
+      targetPort: 80
   type: ClusterIP

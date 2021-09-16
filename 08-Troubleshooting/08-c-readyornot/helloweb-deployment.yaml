@@ -16,26 +16,26 @@ spec:
         tier: web
     spec:
       containers:
-      - name: hello-app
-        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /haelth
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /haelth
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
+        - name: hello-app
+          image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-php:1.0
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /haelth
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /haelth
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3

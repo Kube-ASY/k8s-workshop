@@ -23,7 +23,7 @@ stringData:
 ```yaml
 spec:
   containers:
-  - image: nginx:1.19
+  - image: nginx:1.21
     name: nginx
     volumeMounts: 
       - name: auth-volume

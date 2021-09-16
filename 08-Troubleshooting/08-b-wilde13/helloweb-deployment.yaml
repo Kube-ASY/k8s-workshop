@@ -16,11 +16,11 @@ spec:
         tier: web
     spec:
       containers:
-      - name: hello-app
-        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:2.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
+        - name: hello-app
+          image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:2.0
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,8 +40,8 @@ spec:
         tier: web
     spec:
       containers:
-      - name: hello-app
-        image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:2.0.13
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
+        - name: hello-app
+          image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/hello-app:2.0.13
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080

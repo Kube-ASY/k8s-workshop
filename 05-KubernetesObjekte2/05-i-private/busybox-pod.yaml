@@ -9,10 +9,10 @@ spec:
   imagePullSecrets:
     - name: myregistrykey
   containers:
-  - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
-    imagePullPolicy: Always
-    name: busybox
-    command:
-      - "sleep"
-      - "300"
+    - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop-private/busybox:latest
+      imagePullPolicy: Always
+      name: busybox
+      command:
+        - "sleep"
+        - "300"
   restartPolicy: Always

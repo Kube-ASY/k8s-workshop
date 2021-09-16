@@ -22,7 +22,7 @@ Beispiel von RBAC im Container
     namespace: rbac
   spec:
     containers:
-    - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/kubectl:1.20.0
+    - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/kubectl:1.20.10
       imagePullPolicy: IfNotPresent
       name: kubectl
       command: [ "sleep","3600" ]
@@ -93,7 +93,7 @@ Beispiel von RBAC im Container
     namespace: rbac
   spec:
     containers:
-    - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/kubectl:1.20.0
+    - image: harbor.csvcdev.vpc.arvato-systems.de/k8s-workshop/kubectl:1.20.10
       imagePullPolicy: IfNotPresent
       name: kubectl
       command: [ "sleep","3600" ]
