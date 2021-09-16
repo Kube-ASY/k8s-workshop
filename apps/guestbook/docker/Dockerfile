@@ -13,9 +13,13 @@
 # limitations under the License.
 FROM php:8.0-apache
 
-RUN pear channel-discover pear.nrk.io
-RUN pear install nrk/Predis
+RUN apt update && apt -y install zip unzip git-all
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 
 ADD guestbook.php /var/www/html/guestbook.php
 ADD controllers.js /var/www/html/controllers.js
 ADD index.html /var/www/html/index.html
+
+WORKDIR /var/www/html
+RUN composer update
