@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MINIKUBE=v1.23.0
+export MINIKUBE=v1.23.2
 export K8S=v1.20.10
 
 sudo apt-get update
