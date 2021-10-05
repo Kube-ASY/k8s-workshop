@@ -1,4 +1,4 @@
-# Übungen 1
+# Übungen 1 (30-40min)
 
 ## Hinweis
 
@@ -21,7 +21,7 @@ Deploye die hello-app in diesem Verzeichnis in dem Du
 * Besuche den Webservice mit einen Browser oder `curl` in dem Du auf den durch den port-forward auf localhost geöffneten Port 
 
 ## (b) LoadBalancer Service
-* Ändere das _Service_ Manifest, so dass eine _Service_ vom Typ `LoadBalancer` erstellt wird
+* Ändere das _Service_ Manifest (die yaml Datei mit der der Service erstellt wurde), so dass ein _Service_ vom Typ `LoadBalancer` erstellt wird
 * Deploye die Änderung im Cluster
 * Aktiviere im Minikube die LoadBalancer Emulation (in einem anderen Terminal `minikube tunnel` ausführen)
 * Ermittle die externe IP des Loadbalancers
@@ -37,7 +37,7 @@ Hinweis: die Syntax für eine Secret-Referenz findest Du hier: [https://kubernet
 
 ## (d) Scaling / _Deployment_
 * Scaliere das _Deployment_ auf 5 Pods
-* Ändere den Container im _Deployment_ auf das Tag `2.0` im yaml File
+* Ändere den Container im _Deployment_ auf das Image version tag auf `2.0` im yaml File
 * Deploye die Änderung
 * Beobachte das _Deployment_
 
