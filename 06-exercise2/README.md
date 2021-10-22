@@ -20,7 +20,7 @@ Im Ordner befinden sich
 * Erstelle einen Namespace `website` und deploye diese Komponenten darin.
 * Setze den Current-Context deiner kubectl config auf diesen Namespace (siehe Übung 1)
 
-* Erstelle wie in [05-g-Ingress](../05-KubernetesObjekte2/5-g-Ingress/) beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
+* Erstelle wie in [05-g-Ingress](../05-KubernetesObjekte2/05-g-Ingress/) beschrieben einen Ingress und einen `/etc/hosts` Eintrag um auf den nginx mittels der URL `website.k8s-workshop.info` zuzugreifen. (http reicht)
 * Passe zum z.B. diesen Ingress aus der Demonstration entsprechend an:
     * Konfiguriere den richtigen Hostnamen (URL)
     * Ermittle Namen und Port des Service der angsprochen werden soll
