@@ -1,4 +1,4 @@
-FROM bitnami/nginx:1.21
+FROM bitnami/nginx:1.25
 
 ADD controllers.js /app/controllers.js
 ADD angular.min.js /app/angular.min.js
