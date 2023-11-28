@@ -1,4 +1,4 @@
-FROM bitnami/php-fpm:8.0
+FROM bitnami/php-fpm:8.3
 
 RUN apt update && apt -y install zip unzip git-all
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
