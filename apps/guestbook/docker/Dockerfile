@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM php:8.0-apache
+FROM php:8.3-apache
 
 RUN apt update && apt -y install zip unzip git-all
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
