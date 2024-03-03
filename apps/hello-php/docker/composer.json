@@ -2,7 +2,7 @@
     "name": "kube-asy/hello-php",
     "type": "project",
     "require": {
-        "slim/slim": "4.8.1",
+        "slim/slim": "4.13.0",
         "slim/psr7": "1.4"
     }
 }
